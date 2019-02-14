@@ -8,6 +8,7 @@ SRC_URI = "git://github.com/tensorflow/tensorflow.git;branch=r1.13 \
            file://0001-add-yocto-toolchain-to-support-cross-compiling.patch \
            file://0001-fix-gcc-internal-compile-error-on-qemuarm64.patch \
            file://0001-SyntaxError-around-async-keyword-on-Python-3.7.patch \
+           file://0001-support-musl.patch \
            file://BUILD \
            file://BUILD.yocto_compiler \
            file://CROSSTOOL.tpl \
