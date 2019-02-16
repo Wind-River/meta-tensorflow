@@ -1,0 +1,170 @@
+Introduction
+-----------
+TensorFlow is an open source software library for high performance numerical
+computation primarily used in machine learning. Its flexible architecture
+allows easy deployment of computation across a variety of types of platforms
+(CPUs, GPUs, TPUs), and a range of systems from single desktops to clusters
+of servers to mobile and edge devices.
+(https://www.tensorflow.org/)
+
+The build system of TensorFlow is Bazel (https://bazel.build/).
+
+This layer integrates TensorFlow to OE/Yocto platform
+- Integrate Google's bazel to Yocto
+- Add Yocto toolchain for bazel to support cross compiling.
+- Replace python package system(pip/wheel) with Yocto package system(rpm/deb/ipk).
+
+Dependencies
+------------
+URI: git://github.com/openembedded/openembedded-core.git
+branch: master
+revision: HEAD
+
+URI: git://github.com/openembedded/bitbake.git
+branch: master
+revision: HEAD
+
+URI: git://github.com/openembedded/meta-openembedded.git
+layers: meta-python, meta-oe
+branch: master
+revision: HEAD
+
+URI: git://git.yoctoproject.org/meta-java
+branch: master
+revision: HEAD
+
+Source code
+-----------
+git://git.yoctoproject.org/meta-tensorflow (TODO, github first?)
+
+Maintenance
+-----------
+Maintainers: Hongxu Jia <jiahongxujia@163.com> | <hongxu.jia@windriver.com>
+
+Contributing
+-----------
+Contributions and patches can be sent to the Yocto Project mailing
+list: yocto@yoctoproject.org"
+
+When sending patches please take a look at the contribution guide available
+here: https://wiki.yoctoproject.org/wiki/Contribution_Guidelines
+
+example:
+git send-email -1 -M --to yocto@yoctoproject.org  --subject-prefix=meta-tensorflow][PATCH
+
+Limitation
+-----------
+- Bazel build takes lots of time, since it like bitbake which has own rules and builds
+  everything from scratch. Currently bazel could not reuse Yocto DEPENDS/RDEPENDS.
+
+- Do not support offline build since bazel build system require fetches archive
+  tarballs through network.
+
+- In order to run tensorflow cases in a reasonable time, although it builds
+  successfully on qemuarm, qemuarm64, qemumips, qemumips64, qemux86 and qemux86-64,
+  only qemux86-64 with kvm for runtime test.
+
+- Do not support 32-bit powerpc (qemuppc) since BoringSSL does not support it.
+  (BoringSSL is a fork of OpenSSL used to implement cryptography and TLS across
+  most of Google's products)
+
+Future plan
+-----------
+- Support offline build which bazel build system fetches archive tarballs
+  from Yocto download mirror.
+
+- Support more BSP, such as atom, beagleboard, raspberrypi.
+
+- Introduce more machine learning cases to meta-tensorflow.
+
+- Recipe maintenance and upgrade
+
+Build and run
+-----------
+1. Clone away
+$ mkdir <ts-project>
+$ cd <ts-project>
+$ git clone git://git.yoctoproject.org/meta-tensorflow
+$ git clone git://git.yoctoproject.org/meta-java
+$ git clone git://git.openembedded.org/meta-openembedded
+$ git clone git://git.openembedded.org/openembedded-core oe-core
+$ cd oe-core
+$ git clone git://git.openembedded.org/bitbake
+
+2. Prepare build
+$ . <ts-project>/oe-core/oe-init-build-env <build>
+
+# Build qemux86-64 which runqemu supports kvm.
+$ echo 'MACHINE = "qemux86-64"' >> conf/local.conf
+
+$ echo 'IMAGE_INSTALL_append = " tensorflow"' >> conf/local.conf
+
+Edit conf/bblayers.conf to include other layers
+BBLAYERS ?= " \
+    <ts-project>/oe-core/meta \
+    <ts-project>/meta-openembedded/meta-python \
+    <ts-project>/meta-openembedded/meta-oe \
+    <ts-project>/meta-java \
+    <ts-project>/meta-tensorflow \
+"
+
+
+3. Build image in <build>.
+$ bitbake core-image-minimal
+
+4. Start qemu with slrip + kvm + 5GB memory:
+$ runqemu qemux86-64 core-image-minimal slirp kvm qemuparams="-m 5120"
+
+5. Verify the install
+root@qemux86-64:~# python3 -c "import tensorflow as tf; tf.enable_eager_execution(); print(tf.reduce_sum(tf.random_normal([1000, 1000])))"
+tf.Tensor(-604.65454, shape=(), dtype=float32)
+
+6. Run tutorial case
+https://www.tensorflow.org/tutorials
+
+root@qemux86-64:~# cat >code.py <<ENDOF
+import tensorflow as tf
+mnist = tf.keras.datasets.mnist
+
+(x_train, y_train),(x_test, y_test) = mnist.load_data()
+x_train, x_test = x_train / 255.0, x_test / 255.0
+
+model = tf.keras.models.Sequential([
+  tf.keras.layers.Flatten(input_shape=(28, 28)),
+  tf.keras.layers.Dense(512, activation=tf.nn.relu),
+  tf.keras.layers.Dropout(0.2),
+  tf.keras.layers.Dense(10, activation=tf.nn.softmax)
+])
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+model.fit(x_train, y_train, epochs=5)
+model.evaluate(x_test, y_test)
+ENDOF
+
+root@qemux86-64:~# python3 ./code.py
+Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz
+11493376/11490434 [==============================] - 7s 1us/step
+Instructions for updating:
+Colocations handled automatically by placer.
+Instructions for updating:
+Please use `rate` instead of `keep_prob`. Rate should be set to `rate = 1 - keep_prob`.
+Epoch 1/5
+60000/60000 [==============================] - 27s 449us/sample - loss: 0.2211 - acc: 0.9346
+Epoch 2/5
+60000/60000 [==============================] - 24s 408us/sample - loss: 0.0969 - acc: 0.9702
+Epoch 3/5
+60000/60000 [==============================] - 26s 439us/sample - loss: 0.0694 - acc: 0.9780
+Epoch 4/5
+60000/60000 [==============================] - 23s 390us/sample - loss: 0.0540 - acc: 0.9832
+Epoch 5/5
+60000/60000 [==============================] - 24s 399us/sample - loss: 0.0447 - acc: 0.9851
+10000/10000 [==============================] - 1s 91us/sample - loss: 0.0700 - acc: 0.9782
+
+License
+-------
+
+All metadata is MIT licensed unless otherwise stated. Source code included
+in tree for individual recipes is under the LICENSE stated in each recipe
+(.bb file) unless otherwise stated.
