@@ -10,12 +10,18 @@ SRC_URI = "git://github.com/tensorflow/tensorflow.git;branch=r1.13 \
            file://0001-SyntaxError-around-async-keyword-on-Python-3.7.patch \
            file://0001-support-musl.patch \
            file://0001-fix-build-tensorflow-lite-examples-label_image-label.patch \
+           file://0001-label_image-tweak-default-model-location.patch \
            file://BUILD \
            file://BUILD.yocto_compiler \
            file://CROSSTOOL.tpl \
            file://yocto_compiler_configure.bzl \
           "
+
 S = "${WORKDIR}/git"
+
+SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/inception_v3_2016_08_28_frozen.pb.tar.gz;name=model"
+SRC_URI[model.md5sum] = "a904ddf15593d03c7dd786d552e22d73"
+SRC_URI[model.sha256sum] = "7045b72a954af4dce36346f478610acdccbf149168fa25c78e54e32f0c723d6d"
 
 DEPENDS += " \
     python3 \
@@ -106,7 +112,8 @@ do_compile () {
         //tensorflow:libtensorflow_cc.so \
         //tensorflow:libtensorflow_framework.so \
         //tensorflow/tools/benchmark:benchmark_model \
-        //tensorflow/tools/pip_package:build_pip_package
+        //tensorflow/tools/pip_package:build_pip_package \
+        tensorflow/examples/label_image/... \
 
     ${STAGING_BINDIR_NATIVE}/bazel shutdown
 }
@@ -123,6 +130,16 @@ do_install() {
     install -d ${D}${sbindir}
     install -m 755 ${S}/bazel-bin/tensorflow/tools/benchmark/benchmark_model \
         ${D}${sbindir}
+
+    install -m 755 ${S}/bazel-bin/tensorflow/examples/label_image/label_image \
+        ${D}${sbindir}
+
+    install -d ${D}${datadir}/label_image
+    install -m 644 ${WORKDIR}/imagenet_slim_labels.txt ${D}${datadir}/label_image
+    install -m 644 ${WORKDIR}/inception_v3_2016_08_28_frozen.pb \
+        ${D}${datadir}/label_image
+    install -m 644 ${S}/tensorflow/examples/label_image/data/grace_hopper.jpg \
+        ${D}${datadir}/label_image
 
     export TMPDIR="${WORKDIR}"
     echo "Generating pip package"
@@ -148,7 +165,7 @@ do_install() {
 FILES_${PN}-dev = ""
 INSANE_SKIP_${PN} += "dev-so \
                      "
-FILES_${PN} += "${libdir}/*"
+FILES_${PN} += "${libdir}/* ${datadir}/*"
 
 UNSUPPORTED_TARGET_ARCH = "powerpc"
 python __anonymous() {
