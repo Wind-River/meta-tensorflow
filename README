@@ -73,8 +73,6 @@ Future plan
 - Support offline build which bazel build system fetches archive tarballs
   from Yocto download mirror.
 
-- Support more BSP, such as atom, beagleboard, raspberrypi.
-
 - Introduce more machine learning cases to meta-tensorflow.
 
 - Recipe maintenance and upgrade
