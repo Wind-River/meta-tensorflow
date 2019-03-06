@@ -24,9 +24,9 @@ SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/incept
 SRC_URI[model-inv3.md5sum] = "a904ddf15593d03c7dd786d552e22d73"
 SRC_URI[model-inv3.sha256sum] = "7045b72a954af4dce36346f478610acdccbf149168fa25c78e54e32f0c723d6d"
 
-SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_224_android_quant_2017_11_08.zip;name=model-mobv1"
-SRC_URI[model-mobv1.md5sum] = "ad2ba2089114cf03a5b8189bc4c09c59"
-SRC_URI[model-mobv1.sha256sum] = "23f814d1c076bdf03715dfb6cab3713aa4fbdf040fd5448c43196bd2e97a4c1b"
+SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip;name=model-mobv1"
+SRC_URI[model-mobv1.md5sum] = "38ac0c626947875bd311ef96c8baab62"
+SRC_URI[model-mobv1.sha256sum] = "2f8054076cf655e1a73778a49bd8fd0306d32b290b7e576dda9574f00f186c0f"
 
 DEPENDS += " \
     python3 \
@@ -150,8 +150,8 @@ do_install() {
     install -m 644 ${S}/tensorflow/examples/label_image/data/grace_hopper.jpg \
         ${D}${datadir}/label_image
 
-    install -m 644 ${WORKDIR}/labels.txt ${D}${datadir}/label_image
-    install -m 644 ${WORKDIR}/mobilenet_quant_v1_224.tflite \
+    install -m 644 ${WORKDIR}/labels_mobilenet_quant_v1_224.txt ${D}${datadir}/label_image
+    install -m 644 ${WORKDIR}/mobilenet_v1_1.0_224_quant.tflite \
         ${D}${datadir}/label_image
     install -m 644 ${S}/tensorflow/lite/examples/label_image/testdata/grace_hopper.bmp \
         ${D}${datadir}/label_image

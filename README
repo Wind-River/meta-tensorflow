@@ -172,18 +172,18 @@ real	0m 10.50s
 user	0m 3.95s
 sys	0m 6.46s
 root@qemux86-64:~# time label_image.lite
-Loaded model /usr/share/label_image/mobilenet_quant_v1_224.tflite
+Loaded model /usr/share/label_image/mobilenet_v1_1.0_224_quant.tflite
 resolved reporter
 invoked
-average time: 1727.16 ms
-0.666667: 458 bow tie
-0.290196: 653 military uniform
-0.0117647: 835 suit
-0.00784314: 611 jersey
-0.00392157: 922 book jacket
-real	0m 1.78s
-user	0m 1.73s
-sys	0m 0.04s
+average time: 1064.8 ms
+0.780392: 653 military uniform
+0.105882: 907 Windsor tie
+0.0156863: 458 bow tie
+0.0117647: 466 bulletproof vest
+0.00784314: 835 suit
+real	0m 1.10s
+user	0m 1.07s
+sys	0m 0.02s
 
 License
 -------
