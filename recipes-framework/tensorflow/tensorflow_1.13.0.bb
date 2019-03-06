@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/tensorflow/tensorflow.git;branch=r1.13 \
            file://0001-support-musl.patch \
            file://0001-fix-build-tensorflow-lite-examples-label_image-label.patch \
            file://0001-label_image-tweak-default-model-location.patch \
+           file://0001-label_image.lite-tweak-default-model-location.patch \
            file://BUILD \
            file://BUILD.yocto_compiler \
            file://CROSSTOOL.tpl \
@@ -19,9 +20,13 @@ SRC_URI = "git://github.com/tensorflow/tensorflow.git;branch=r1.13 \
 
 S = "${WORKDIR}/git"
 
-SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/inception_v3_2016_08_28_frozen.pb.tar.gz;name=model"
-SRC_URI[model.md5sum] = "a904ddf15593d03c7dd786d552e22d73"
-SRC_URI[model.sha256sum] = "7045b72a954af4dce36346f478610acdccbf149168fa25c78e54e32f0c723d6d"
+SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/inception_v3_2016_08_28_frozen.pb.tar.gz;name=model-inv3"
+SRC_URI[model-inv3.md5sum] = "a904ddf15593d03c7dd786d552e22d73"
+SRC_URI[model-inv3.sha256sum] = "7045b72a954af4dce36346f478610acdccbf149168fa25c78e54e32f0c723d6d"
+
+SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_224_android_quant_2017_11_08.zip;name=model-mobv1"
+SRC_URI[model-mobv1.md5sum] = "ad2ba2089114cf03a5b8189bc4c09c59"
+SRC_URI[model-mobv1.sha256sum] = "23f814d1c076bdf03715dfb6cab3713aa4fbdf040fd5448c43196bd2e97a4c1b"
 
 DEPENDS += " \
     python3 \
@@ -114,6 +119,7 @@ do_compile () {
         //tensorflow/tools/benchmark:benchmark_model \
         //tensorflow/tools/pip_package:build_pip_package \
         tensorflow/examples/label_image/... \
+        //tensorflow/lite/examples/label_image:label_image \
 
     ${STAGING_BINDIR_NATIVE}/bazel shutdown
 }
@@ -134,12 +140,22 @@ do_install() {
     install -m 755 ${S}/bazel-bin/tensorflow/examples/label_image/label_image \
         ${D}${sbindir}
 
+    install -m 755 ${S}/bazel-bin/tensorflow/lite/examples/label_image/label_image \
+        ${D}${sbindir}/label_image.lite
+
     install -d ${D}${datadir}/label_image
     install -m 644 ${WORKDIR}/imagenet_slim_labels.txt ${D}${datadir}/label_image
     install -m 644 ${WORKDIR}/inception_v3_2016_08_28_frozen.pb \
         ${D}${datadir}/label_image
     install -m 644 ${S}/tensorflow/examples/label_image/data/grace_hopper.jpg \
         ${D}${datadir}/label_image
+
+    install -m 644 ${WORKDIR}/labels.txt ${D}${datadir}/label_image
+    install -m 644 ${WORKDIR}/mobilenet_quant_v1_224.tflite \
+        ${D}${datadir}/label_image
+    install -m 644 ${S}/tensorflow/lite/examples/label_image/testdata/grace_hopper.bmp \
+        ${D}${datadir}/label_image
+
 
     export TMPDIR="${WORKDIR}"
     echo "Generating pip package"
