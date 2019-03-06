@@ -160,6 +160,31 @@ Epoch 5/5
 60000/60000 [==============================] - 24s 399us/sample - loss: 0.0447 - acc: 0.9851
 10000/10000 [==============================] - 1s 91us/sample - loss: 0.0700 - acc: 0.9782
 
+7. TensorFlow/TensorFlow Lite C++ Image Recognition Demo
+
+root@qemux86-64:~# time label_image
+2019-03-06 06:08:51.076028: I tensorflow/examples/label_image/main.cc:251] military uniform (653): 0.834306
+2019-03-06 06:08:51.078221: I tensorflow/examples/label_image/main.cc:251] mortarboard (668): 0.0218695
+2019-03-06 06:08:51.080054: I tensorflow/examples/label_image/main.cc:251] academic gown (401): 0.010358
+2019-03-06 06:08:51.081943: I tensorflow/examples/label_image/main.cc:251] pickelhaube (716): 0.00800814
+2019-03-06 06:08:51.083830: I tensorflow/examples/label_image/main.cc:251] bulletproof vest (466): 0.00535084
+real	0m 10.50s
+user	0m 3.95s
+sys	0m 6.46s
+root@qemux86-64:~# time label_image.lite
+Loaded model /usr/share/label_image/mobilenet_quant_v1_224.tflite
+resolved reporter
+invoked
+average time: 1727.16 ms
+0.666667: 458 bow tie
+0.290196: 653 military uniform
+0.0117647: 835 suit
+0.00784314: 611 jersey
+0.00392157: 922 book jacket
+real	0m 1.78s
+user	0m 1.73s
+sys	0m 0.04s
+
 License
 -------
 
