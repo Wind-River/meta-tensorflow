@@ -59,4 +59,13 @@ do_install() {
     ${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -v --no-deps \
         -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-cache-dir ${WORKDIR}/tensorflow*.whl
 
+    install -d ${D}${sbindir}
+    (
+        cd ${D}${PYTHON_SITEPACKAGES_DIR}/bin;
+        for app in `ls`; do
+            mv $app ${D}${sbindir}
+        done
+
+    )
+
 }
