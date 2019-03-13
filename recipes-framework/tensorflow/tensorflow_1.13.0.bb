@@ -56,7 +56,7 @@ RDEPENDS_${PN} += " \
 inherit python3native bazel
 
 export PYTHON_BIN_PATH="${PYTHON}"
-export PYTHON_LIB_PATH="${STAGING_DIR_NATIVE}${PYTHON_SITEPACKAGES_DIR}"
+export PYTHON_LIB_PATH="${STAGING_LIBDIR_NATIVE}/${PYTHON_DIR}/site-packages"
 
 do_configure_append () {
     CROSSTOOL_PYTHON_INCLUDE_PATH="${STAGING_INCDIR}/python${PYTHON_BASEVERSION}${PYTHON_ABI}"
