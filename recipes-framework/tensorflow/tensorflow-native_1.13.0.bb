@@ -6,6 +6,7 @@ DEPENDS = "bazel-native protobuf-native util-linux-native protobuf"
 SRCREV = "c8875cbb1341f6ca14dd0ec908f1dde7d67f7808"
 SRC_URI = "git://github.com/tensorflow/tensorflow.git;branch=r1.13 \
            file://0001-SyntaxError-around-async-keyword-on-Python-3.7.patch \
+           file://0001-use-local-bazel-to-workaround-bazel-paralle-issue.patch \
           "
 S = "${WORKDIR}/git"
 
@@ -37,14 +38,14 @@ do_configure_append () {
 
 do_compile () {
     unset CC
-    ${STAGING_BINDIR_NATIVE}/bazel build \
+    ${S}/bazel build \
         -c opt \
         --subcommands --explain=${T}/explain.log \
         --verbose_explanations --verbose_failures \
         --verbose_failures \
         //tensorflow/tools/pip_package:build_pip_package
 
-    ${STAGING_BINDIR_NATIVE}/bazel shutdown
+    ${S}/bazel shutdown
 }
 
 do_install() {

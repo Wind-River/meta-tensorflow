@@ -10,6 +10,13 @@ export BAZEL_ARGS="--output_user_root=${WORKDIR}/bazel/user_root \
 
 export JAVA_HOME="${RECIPE_SYSROOT_NATIVE}/usr/lib/jvm/openjdk-8-native"
 
+do_prepare_recipe_sysroot[postfuncs] += "do_install_bazel"
+do_install_bazel() {
+    install -m 0755 ${STAGING_BINDIR_NATIVE}/bazel ${S}
+    create_cmdline_wrapper ${S}/bazel \$BAZEL_ARGS
+    zip -A ${S}/bazel.real
+}
+
 def bazel_get_flags(d):
     flags = ""
     for i in d.getVar("CC").split()[1:]:

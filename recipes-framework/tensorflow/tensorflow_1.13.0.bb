@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/tensorflow/tensorflow.git;branch=r1.13 \
            file://0001-fix-build-tensorflow-lite-examples-label_image-label.patch \
            file://0001-label_image-tweak-default-model-location.patch \
            file://0001-label_image.lite-tweak-default-model-location.patch \
+           file://0001-use-local-bazel-to-workaround-bazel-paralle-issue.patch \
            file://BUILD \
            file://BUILD.yocto_compiler \
            file://CROSSTOOL.tpl \
@@ -105,7 +106,7 @@ ENDOF
 
 do_compile () {
     unset CC
-    ${STAGING_BINDIR_NATIVE}/bazel build \
+    ${S}/bazel build \
         --config=monolithic \
         -c opt \
         --cpu=armeabi \
@@ -121,7 +122,7 @@ do_compile () {
         tensorflow/examples/label_image/... \
         //tensorflow/lite/examples/label_image:label_image \
 
-    ${STAGING_BINDIR_NATIVE}/bazel shutdown
+    ${S}/bazel shutdown
 }
 
 do_install() {

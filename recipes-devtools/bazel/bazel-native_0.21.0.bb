@@ -29,5 +29,4 @@ do_compile () {
 do_install () {
     install -d ${D}${bindir}
     install -m 0755 ${S}/output/bazel ${D}${bindir}
-    create_cmdline_wrapper ${D}/${bindir}/bazel \$BAZEL_ARGS
 }
