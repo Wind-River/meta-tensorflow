@@ -113,6 +113,7 @@ do_compile () {
         --verbose_explanations --verbose_failures \
         --crosstool_top=@local_config_yocto_compiler//:toolchain \
         --verbose_failures \
+        --copt -DTF_LITE_DISABLE_X86_NEON \
         //tensorflow:libtensorflow.so \
         //tensorflow:libtensorflow_cc.so \
         //tensorflow:libtensorflow_framework.so \
