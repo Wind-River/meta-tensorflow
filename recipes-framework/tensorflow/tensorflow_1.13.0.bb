@@ -36,7 +36,6 @@ DEPENDS += " \
     python3-keras-preprocessing-native \
     python3-pip-native \
     python3-wheel-native \
-    tensorflow-native \
 "
 
 RDEPENDS_${PN} += " \
