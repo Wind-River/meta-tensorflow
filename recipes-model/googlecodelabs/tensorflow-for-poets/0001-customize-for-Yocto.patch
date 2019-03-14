@@ -1,0 +1,135 @@
+From 2e95a2fa516878327849550f0c52c1f436112d5d Mon Sep 17 00:00:00 2001
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Date: Fri, 15 Mar 2019 14:35:02 +0800
+Subject: [PATCH] customize for Yocto
+
+Upstream-Status: Inappropriate [oe specific]
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ scripts/__init__.py    |  2 +-
+ scripts/label_image.py | 87 +++++++++++++++++++++++++++++++-------------------
+ 2 files changed, 55 insertions(+), 34 deletions(-)
+
+diff --git a/scripts/__init__.py b/scripts/__init__.py
+index b1ae3c1..8d2ef2f 100644
+--- a/scripts/__init__.py
++++ b/scripts/__init__.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python3
+ #
+ # Copyright 2017 Google Inc.
+ #
+diff --git a/scripts/label_image.py b/scripts/label_image.py
+index 214c4ec..7ecf259 100644
+--- a/scripts/label_image.py
++++ b/scripts/label_image.py
+@@ -1,3 +1,4 @@
++#!/usr/bin/python3
+ # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+@@ -67,16 +68,58 @@ def load_labels(label_file):
+     label.append(l.rstrip())
+   return label
+ 
++def label_image(file_name = None,
++                model_file = "/usr/share/label_image/retrained_graph.pb",
++                label_file = "/usr/share/label_image/retrained_labels.txt",
++                input_height = 224,
++                input_width = 224,
++                input_mean = 128,
++                input_std = 128,
++                input_layer = "input",
++                output_layer = "final_result"):
++
++  if file_name is None:
++    return None, None
++
++  graph = load_graph(model_file)
++  t = read_tensor_from_image_file(file_name,
++                                  input_height=input_height,
++                                  input_width=input_width,
++                                  input_mean=input_mean,
++                                  input_std=input_std)
++
++  input_name = "import/" + input_layer
++  output_name = "import/" + output_layer
++  input_operation = graph.get_operation_by_name(input_name);
++  output_operation = graph.get_operation_by_name(output_name);
++
++  with tf.Session(graph=graph) as sess:
++    start = time.time()
++    results = sess.run(output_operation.outputs[0],
++                      {input_operation.outputs[0]: t})
++    end=time.time()
++  results = np.squeeze(results)
++
++  top_k = results.argsort()[-5:][::-1]
++  labels = load_labels(label_file)
++
++  print('\nEvaluation time (1-image): {:.3f}s\n'.format(end-start))
++  template = "{} (score={:0.5f})"
++  for i in top_k:
++    print(template.format(labels[i], results[i]))
++    return labels[i], results[i]
++
+ if __name__ == "__main__":
+-  file_name = "tf_files/flower_photos/daisy/3475870145_685a19116d.jpg"
+-  model_file = "tf_files/retrained_graph.pb"
+-  label_file = "tf_files/retrained_labels.txt"
+-  input_height = 224
+-  input_width = 224
+-  input_mean = 128
+-  input_std = 128
++  file_name = "/usr/share/label_image/grace_hopper.jpg"
++  model_file = \
++    "/usr/share/label_image/inception_v3_2016_08_28_frozen.pb"
++  label_file = "/usr/share/label_image/imagenet_slim_labels.txt"
++  input_height = 299
++  input_width = 299
++  input_mean = 0
++  input_std = 255
+   input_layer = "input"
+-  output_layer = "final_result"
++  output_layer = "InceptionV3/Predictions/Reshape_1"
+ 
+   parser = argparse.ArgumentParser()
+   parser.add_argument("--image", help="image to be processed")
+@@ -109,29 +152,7 @@ if __name__ == "__main__":
+   if args.output_layer:
+     output_layer = args.output_layer
+ 
+-  graph = load_graph(model_file)
+-  t = read_tensor_from_image_file(file_name,
+-                                  input_height=input_height,
+-                                  input_width=input_width,
+-                                  input_mean=input_mean,
+-                                  input_std=input_std)
+-
+-  input_name = "import/" + input_layer
+-  output_name = "import/" + output_layer
+-  input_operation = graph.get_operation_by_name(input_name);
+-  output_operation = graph.get_operation_by_name(output_name);
++  label_image(file_name, model_file, label_file,
++              input_height, input_width, input_mean,
++              input_std, input_layer, output_layer)
+ 
+-  with tf.Session(graph=graph) as sess:
+-    start = time.time()
+-    results = sess.run(output_operation.outputs[0],
+-                      {input_operation.outputs[0]: t})
+-    end=time.time()
+-  results = np.squeeze(results)
+-
+-  top_k = results.argsort()[-5:][::-1]
+-  labels = load_labels(label_file)
+-
+-  print('\nEvaluation time (1-image): {:.3f}s\n'.format(end-start))
+-  template = "{} (score={:0.5f})"
+-  for i in top_k:
+-    print(template.format(labels[i], results[i]))
+-- 
+2.7.4
+
