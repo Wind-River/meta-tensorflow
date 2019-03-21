@@ -4,8 +4,8 @@
 ### 1.1 What the demo does
 * Build TensorFlow/TensorFlow Lite for Yocto
 * Use Yocto build system to retrain an image classifier model
-* Use Yocto build system retrain a custom image recognition model
-* Use Yocto build system optimize your model for embedded device.
+* Use Yocto build system to retrain a custom image recognition model
+* Use Yocto build system to optimize the model for embedded device.
 * Run optimized model to do face recognition on embedded device.
 
 ### 1.2 Hardware
