@@ -35,7 +35,9 @@ revision: HEAD
 
 Source code
 -----------
-git://git.yoctoproject.org/meta-tensorflow (TODO, github first?)
+https://github.com/hongxu-jia/meta-tensorflow.git
+or
+git://git.yoctoproject.org/meta-tensorflow
 
 Maintenance
 -----------
