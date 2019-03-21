@@ -3,7 +3,7 @@
 ## Demo 1. [TensorFlow for poets 2](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/#0)
 ### 1.1 What the demo does
 * Build TensorFlow/TensorFlow Lite for Yocto
-* Use Yocto build system to train an image classifier model
+* Use Yocto build system to retrain an image classifier model
 * Use Yocto build system retrain a custom image recognition model
 * Use Yocto build system optimize your model for embedded device.
 * Run optimized model to do face recognition on embedded device.
