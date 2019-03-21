@@ -31,6 +31,7 @@ $ cd <ts-project>
 $ git clone git://git.yoctoproject.org/meta-tensorflow
 $ git clone git://git.yoctoproject.org/meta-java
 $ git clone git://git.openembedded.org/meta-openembedded
+$ git clone git://git.yoctoproject.org/meta-yocto
 $ git clone git://git.openembedded.org/openembedded-core oe-core
 $ cd oe-core
 $ git clone git://git.openembedded.org/bitbake
@@ -42,6 +43,7 @@ $ echo 'DISTRO_FEATURES_append = " ts-demo x11"' >> conf/local.conf
 $ bitbake add-layer <ts-project>/meta-openembedded/meta-python
 $ bitbake add-layer <ts-project>/meta-openembedded/meta-oe
 $ bitbake add-layer <ts-project>/meta-java
+$ bitbake add-layer <ts-project>/meta-yocto/meta-yocto-bsp
 $ bitbake add-layer <ts-project>/meta-tensorflow
 $ bitbake add-layer <ts-project>/meta-tensorflow/meta-demo
 
