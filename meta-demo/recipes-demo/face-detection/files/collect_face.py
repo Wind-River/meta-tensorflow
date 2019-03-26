@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # Copyright (c) 2019, Wind River Systems, Inc.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -17,7 +18,6 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-#!/usr/bin/python3
 import os
 import time
 import argparse
