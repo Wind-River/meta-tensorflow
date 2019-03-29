@@ -58,6 +58,16 @@ inherit python3native bazel
 export PYTHON_BIN_PATH="${PYTHON}"
 export PYTHON_LIB_PATH="${STAGING_LIBDIR_NATIVE}/${PYTHON_DIR}/site-packages"
 
+TF_CONFIG ?= " \
+    TF_NEED_CUDA=0 \
+    TF_NEED_OPENCL_SYCL=0 \
+    TF_NEED_OPENCL=0 \
+    TF_CUDA_CLANG=0 \
+    TF_DOWNLOAD_CLANG=0 \
+    TF_ENABLE_XLA=0 \
+    TF_NEED_MPI=0 \
+    TF_SET_ANDROID_WORKSPACE=0 \
+"
 do_configure_append () {
     CROSSTOOL_PYTHON_INCLUDE_PATH="${STAGING_INCDIR}/python${PYTHON_BASEVERSION}${PYTHON_ABI}"
     install -d ${CROSSTOOL_PYTHON_INCLUDE_PATH}
@@ -92,21 +102,16 @@ ENDOF
                             ${S}/third_party/toolchains/yocto/CROSSTOOL.tpl \
                             ${S}/WORKSPACE
 
-    TF_NEED_CUDA=0 \
-    TF_NEED_OPENCL_SYCL=0 \
-    TF_NEED_OPENCL=0 \
-    TF_CUDA_CLANG=0 \
-    TF_DOWNLOAD_CLANG=0 \
-    TF_ENABLE_XLA=0 \
-    TF_NEED_MPI=0 \
-    TF_SET_ANDROID_WORKSPACE=0 \
+    ${TF_CONFIG} \
     ./configure
 }
 
+TF_ARGS_EXTRA ??= "--config=monolithic"
+TF_TARGET_EXTRA ??= ""
 do_compile () {
     unset CC
     ${S}/bazel build \
-        --config=monolithic \
+        ${TF_ARGS_EXTRA} \
         -c opt \
         --cpu=armeabi \
         --subcommands --explain=${T}/explain.log \
@@ -121,6 +126,7 @@ do_compile () {
         //tensorflow/tools/pip_package:build_pip_package \
         tensorflow/examples/label_image/... \
         //tensorflow/lite/examples/label_image:label_image \
+        ${TF_TARGET_EXTRA}
 
     ${S}/bazel shutdown
 }
