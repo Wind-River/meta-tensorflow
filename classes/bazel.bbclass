@@ -47,12 +47,18 @@ def bazel_get_flags(d):
         flags += "--host_conlyopt=%s --host_cxxopt=%s " % (i, i)
 
     for i in d.getVar("LDFLAGS").split():
+        if i == "-Wl,--as-needed":
+            continue
         flags += "--linkopt=%s " % i
 
     for i in d.getVar("BUILD_LDFLAGS").split():
+        if i == "-Wl,--as-needed":
+            continue
         flags += "--host_linkopt=%s " % i
 
     for i in d.getVar("TOOLCHAIN_OPTIONS").split():
+        if i == "-Wl,--as-needed":
+            continue
         flags += "--linkopt=%s " % i
 
     return flags
@@ -66,6 +72,9 @@ test --verbose_failures --verbose_test_summary
 test --spawn_strategy=standalone --genrule_strategy=standalone
 
 build --linkopt=-Wl,-latomic
+build --linkopt=-Wl,--no-as-needed
+build --host_linkopt=-Wl,--no-as-needed
+
 build --strip=never
 
 fetch --distdir=${DL_DIR}

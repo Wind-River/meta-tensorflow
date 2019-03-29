@@ -106,7 +106,7 @@ ENDOF
     ./configure
 }
 
-TF_ARGS_EXTRA ??= "--config=monolithic"
+TF_ARGS_EXTRA ??= ""
 TF_TARGET_EXTRA ??= ""
 do_compile () {
     unset CC
