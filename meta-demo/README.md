@@ -98,3 +98,5 @@ sh-4.4:~# recognize_face
 >![picture](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/files/tensorflow-demo.gif)
 
 ## Demo 2. [Neural Machine Translation](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/recipes-demo/nmt/README-nmt.md)
+
+## Demo 3. [Minigo: A minimalist Go engine modeled after AlphaGo Zero](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/recipes-demo/minigo/README.md)
