@@ -96,3 +96,5 @@ sh-4.4:~#
 sh-4.4:~# recognize_face
 ```
 >![picture](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/files/tensorflow-demo.gif)
+
+## Demo 2. [Neural Machine Translation](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/recipes-demo/nmt/README-nmt.md)
