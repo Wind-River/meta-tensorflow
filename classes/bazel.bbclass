@@ -20,7 +20,7 @@ do_install_bazel() {
 def bazel_get_flags(d):
     flags = ""
     for i in d.getVar("CC").split()[1:]:
-        flags += "--conlyopt=%s --cxxopt=%s " % (i, i)
+        flags += "--conlyopt=%s --cxxopt=%s --linkopt=%s " % (i, i, i)
 
     for i in d.getVar("CFLAGS").split():
         if i == "-g":
