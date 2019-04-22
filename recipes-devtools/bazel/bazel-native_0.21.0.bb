@@ -18,11 +18,12 @@ DEPENDS = "coreutils-native \
 
 S="${WORKDIR}"
 
+TS_DL_DIR ??= "${DL_DIR}"
 do_compile () {
     export JAVA_HOME="${RECIPE_SYSROOT_NATIVE}/usr/lib/jvm/openjdk-8-native"
     TMPDIR="${TOPDIR}/bazel" \
     VERBOSE=yes \
-    EXTRA_BAZEL_ARGS="--distdir=${DL_DIR}" \
+    EXTRA_BAZEL_ARGS="--distdir=${TS_DL_DIR}" \
     ./compile.sh
 }
 

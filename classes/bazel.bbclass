@@ -63,6 +63,7 @@ def bazel_get_flags(d):
 
     return flags
 
+TS_DL_DIR ??= "${DL_DIR}"
 bazel_do_configure () {
     cat > "${S}/bazelrc" <<-EOF
 build --verbose_failures
@@ -77,8 +78,8 @@ build --host_linkopt=-Wl,--no-as-needed
 
 build --strip=never
 
-fetch --distdir=${DL_DIR}
-build --distdir=${DL_DIR}
+fetch --distdir=${TS_DL_DIR}
+build --distdir=${TS_DL_DIR}
 
 EOF
 
