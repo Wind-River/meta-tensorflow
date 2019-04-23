@@ -59,9 +59,6 @@ Limitation
 - Bazel build takes lots of time, since it like bitbake which has own rules and builds
   everything from scratch. Currently bazel could not reuse Yocto DEPENDS/RDEPENDS.
 
-- Do not support offline build since bazel build system require fetches archive
-  tarballs through network.
-
 - In order to run tensorflow cases in a reasonable time, although it builds
   successfully on qemuarm, qemuarm64, qemumips, qemumips64, qemux86 and qemux86-64,
   only qemux86-64 with kvm for runtime test.
