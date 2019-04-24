@@ -63,12 +63,17 @@ def bazel_get_flags(d):
 
     return flags
 
+def jobs_number():
+    if oe.utils.cpu_count() < 16:
+        return 1
+    return int(oe.utils.cpu_count()/2)
+
 TS_DL_DIR ??= "${DL_DIR}"
 bazel_do_configure () {
     cat > "${S}/bazelrc" <<-EOF
 build --verbose_failures
 build --spawn_strategy=standalone --genrule_strategy=standalone
-build --jobs=${@oe.utils.cpu_count()}
+build --jobs=${@jobs_number()}
 test --verbose_failures --verbose_test_summary
 test --spawn_strategy=standalone --genrule_strategy=standalone
 
