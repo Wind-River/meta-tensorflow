@@ -29,10 +29,6 @@ layers: meta-python, meta-oe
 branch: master
 revision: HEAD
 
-URI: git://git.yoctoproject.org/meta-java
-branch: master
-revision: HEAD
-
 Source code
 -----------
 https://github.com/hongxu-jia/meta-tensorflow.git
@@ -67,6 +63,9 @@ Limitation
   (BoringSSL is a fork of OpenSSL used to implement cryptography and TLS across
   most of Google's products)
 
+- If host is not x86_64, please add meta-java to BBLAYERS in conf/bblayers.conf
+  (git://git.yoctoproject.org/meta-java)
+
 Future plan
 -----------
 - Support offline build which bazel build system fetches archive tarballs
@@ -82,7 +81,6 @@ Build and run
 $ mkdir <ts-project>
 $ cd <ts-project>
 $ git clone git://git.yoctoproject.org/meta-tensorflow
-$ git clone git://git.yoctoproject.org/meta-java
 $ git clone git://git.openembedded.org/meta-openembedded
 $ git clone git://git.openembedded.org/openembedded-core oe-core
 $ cd oe-core
@@ -101,7 +99,6 @@ BBLAYERS ?= " \
     <ts-project>/oe-core/meta \
     <ts-project>/meta-openembedded/meta-python \
     <ts-project>/meta-openembedded/meta-oe \
-    <ts-project>/meta-java \
     <ts-project>/meta-tensorflow \
 "
 
