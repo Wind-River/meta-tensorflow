@@ -10,6 +10,11 @@ SRC_URI = " \
 "
 
 S = "${WORKDIR}/jdk-8u212-ojdkbuild-linux-x64"
+
+do_patch[noexec] = "1"
+do_configure[noexec] = "1"
+do_compile[noexec] = "1"
+
 do_install () {
 	install -d ${D}${libdir}/jvm/openjdk-8-native
 	cp -rf ${S}/* ${D}${libdir}/jvm/openjdk-8-native
