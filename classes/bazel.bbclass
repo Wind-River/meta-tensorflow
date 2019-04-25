@@ -8,7 +8,7 @@ export BAZEL_ARGS="--output_user_root=${WORKDIR}/bazel/user_root \
                    --bazelrc=${S}/bazelrc \
                   "
 
-export JAVA_HOME="${RECIPE_SYSROOT_NATIVE}/usr/lib/jvm/openjdk-8-native"
+export JAVA_HOME="${STAGING_LIBDIR_NATIVE}/jvm/openjdk-8-native"
 
 do_prepare_recipe_sysroot[postfuncs] += "do_install_bazel"
 do_install_bazel() {
