@@ -1,6 +1,6 @@
-From 3834b8ecb55ebf2527aaa2502d9030460882931c Mon Sep 17 00:00:00 2001
+From 03b1ddf5058485ce1c94e6a8dc0762ad3430b6a2 Mon Sep 17 00:00:00 2001
 From: Hongxu Jia <hongxu.jia@windriver.com>
-Date: Thu, 31 Jan 2019 22:24:54 +0800
+Date: Thu, 25 Apr 2019 21:13:32 +0800
 Subject: [PATCH] customize for Yocto
 
 - Remove virtualenv/pip/bdist_wheel calling which Yocto does not support
@@ -12,9 +12,9 @@ Upstream-Status: Inappropriate [oe specific]
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
  WORKSPACE                                    |  6 ++++++
- tensorboard/pip_package/build_pip_package.sh | 27 +++------------------------
- third_party/workspace.bzl                    |  8 ++++++++
- 3 files changed, 17 insertions(+), 24 deletions(-)
+ tensorboard/pip_package/build_pip_package.sh | 31 +++-------------------------
+ third_party/workspace.bzl                    |  8 +++++++
+ 3 files changed, 17 insertions(+), 28 deletions(-)
 
 diff --git a/WORKSPACE b/WORKSPACE
 index 8ab70cc..0c18f6f 100644
@@ -33,7 +33,7 @@ index 8ab70cc..0c18f6f 100644
  
  # Needed as a transitive dependency of rules_webtesting below.
 diff --git a/tensorboard/pip_package/build_pip_package.sh b/tensorboard/pip_package/build_pip_package.sh
-index 754fa83..e473f51 100755
+index 754fa83..969709d 100755
 --- a/tensorboard/pip_package/build_pip_package.sh
 +++ b/tensorboard/pip_package/build_pip_package.sh
 @@ -23,7 +23,7 @@ else
@@ -45,10 +45,14 @@ index 754fa83..e473f51 100755
  while [ "$#" -gt 0 ]; do
    case "$1" in
      "--no-smoke")
-@@ -75,27 +75,20 @@ command -v curl >/dev/null
- command -v perl >/dev/null
- command -v python2 >/dev/null
- command -v python3 >/dev/null
+@@ -71,31 +71,20 @@ from tensorboard.plugins.beholder import Beholder, BeholderHook
+ }
+ 
+ set -x
+-command -v curl >/dev/null
+-command -v perl >/dev/null
+-command -v python2 >/dev/null
+-command -v python3 >/dev/null
 -command -v virtualenv >/dev/null
  [ -d "${RUNFILES}" ]
  
@@ -75,7 +79,7 @@ index 754fa83..e473f51 100755
  find . -name __init__.py | xargs chmod -x  # which goes for all genfiles
  
  mkdir -p tensorboard/_vendor
-@@ -117,21 +110,7 @@ find tensorboard -name \*.py |
+@@ -117,21 +106,7 @@ find tensorboard -name \*.py |
      s/from tensorflow_serving/from tensorboard._vendor.tensorflow_serving/
    '
  
