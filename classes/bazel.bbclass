@@ -1,6 +1,7 @@
 DEPENDS += "bazel-native \
            openjdk-8-native \
           "
+DEPENDS_append_class-target = " python3"
 
 BAZEL_OUTPUTBASE_DIR ?= "${WORKDIR}/bazel/output_base"
 export BAZEL_ARGS="--output_user_root=${WORKDIR}/bazel/user_root \
