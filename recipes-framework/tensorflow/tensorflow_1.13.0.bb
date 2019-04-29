@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/tensorflow/tensorflow.git;branch=r1.13 \
            file://0001-label_image-tweak-default-model-location.patch \
            file://0001-label_image.lite-tweak-default-model-location.patch \
            file://0001-use-local-bazel-to-workaround-bazel-paralle-issue.patch \
+           file://0001-CheckFeatureOrDie-use-warning-to-avoid-die.patch \
            file://BUILD \
            file://BUILD.yocto_compiler \
            file://CROSSTOOL.tpl \
