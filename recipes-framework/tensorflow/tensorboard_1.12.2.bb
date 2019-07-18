@@ -13,6 +13,8 @@ SRC_URI = "git://github.com/tensorflow/tensorboard.git; \
 SRCREV = "7194c7486a0c4d107322ffad102c1ca0fcc0fc24"
 S = "${WORKDIR}/git"
 
+DEPENDS = "bazel-native protobuf-native util-linux-native protobuf"
+
 RDEPENDS_${PN} += "python3 \
            python3-numpy \
            python3-protobuf \
