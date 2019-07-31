@@ -1,6 +1,7 @@
 # meta-tensorflow
 
 ## Overview
+```
 TensorFlow is an open source software library for high performance numerical
 computation primarily used in machine learning. Its flexible architecture
 allows easy deployment of computation across a variety of types of platforms
@@ -14,6 +15,7 @@ This layer integrates TensorFlow to OE/Yocto platform
 - Integrate Google's bazel to Yocto
 - Add Yocto toolchain for bazel to support cross compiling.
 - Replace python package system(pip/wheel) with Yocto package system(rpm/deb/ipk).
+```
 
 ## Prerequisite(s)
 ### 1. Based on Yocto
@@ -51,11 +53,13 @@ Wind River Linux (CI/CD branch)
 ## Demo 3. [Minigo: A minimalist Go engine modeled after AlphaGo Zero](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/recipes-demo/minigo/README.md)
 
 ## Project License
+```
 Copyright (C) 2019 Wind River Systems, Inc.
 
 All metadata is MIT licensed unless otherwise stated. Source code included
 in tree for individual recipes is under the LICENSE stated in each recipe
 (.bb file) unless otherwise stated.
+```
 
 ## Legal Notices
 ```
