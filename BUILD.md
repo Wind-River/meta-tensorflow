@@ -1,5 +1,6 @@
 # Build and Run
 ## 1. Clone away
+```
 $ mkdir <ts-project>
 $ cd <ts-project>
 $ git clone git://git.yoctoproject.org/meta-tensorflow
@@ -7,6 +8,7 @@ $ git clone git://git.openembedded.org/meta-openembedded
 $ git clone git://git.openembedded.org/openembedded-core oe-core
 $ cd oe-core
 $ git clone git://git.openembedded.org/bitbake
+```
 
 ## 2. Prepare build
 ```
@@ -26,8 +28,9 @@ BBLAYERS ?= " \
 "
 ```
 
-## 3. Build image in <build>.
+## 3. Build image
 ```
+cd <build>
 $ bitbake core-image-minimal
 ```
 
@@ -43,7 +46,7 @@ tf.Tensor(-604.65454, shape=(), dtype=float32)
 ```
 
 ## 6. Run tutorial case
-https://www.tensorflow.org/tutorials
+### Refer: https://www.tensorflow.org/tutorials
 ```
 root@qemux86-64:~# cat >code.py <<ENDOF
 import tensorflow as tf
