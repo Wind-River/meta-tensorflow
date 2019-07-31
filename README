@@ -32,15 +32,6 @@ layers: meta-python, meta-oe
 branch: master
 revision: HEAD
 
-Future plan
------------
-- Support offline build which bazel build system fetches archive tarballs
-  from Yocto download mirror.
-
-- Introduce more machine learning cases to meta-tensorflow.
-
-- Recipe maintenance and upgrade
-
 License
 -------
 
