@@ -29,7 +29,6 @@
 $ mkdir <ts-project>
 $ cd <ts-project>
 $ git clone git://git.yoctoproject.org/meta-tensorflow
-$ git clone git://git.yoctoproject.org/meta-java
 $ git clone git://git.openembedded.org/meta-openembedded
 $ git clone git://git.yoctoproject.org/meta-yocto
 $ git clone git://git.openembedded.org/openembedded-core oe-core
@@ -40,12 +39,11 @@ $ git clone git://git.openembedded.org/bitbake
 $ . <ts-project>/oe-core/oe-init-build-env <ts-build>
 $ echo 'MACHINE = "genericx86-64"' >> conf/local.conf
 $ echo 'DISTRO_FEATURES_append = " ts-demo x11"' >> conf/local.conf
-$ bitbake add-layer <ts-project>/meta-openembedded/meta-python
-$ bitbake add-layer <ts-project>/meta-openembedded/meta-oe
-$ bitbake add-layer <ts-project>/meta-java
-$ bitbake add-layer <ts-project>/meta-yocto/meta-yocto-bsp
-$ bitbake add-layer <ts-project>/meta-tensorflow
-$ bitbake add-layer <ts-project>/meta-tensorflow/meta-demo
+$ bitbake-layers add-layer <ts-project>/meta-openembedded/meta-python
+$ bitbake-layers add-layer <ts-project>/meta-openembedded/meta-oe
+$ bitbake-layers add-layer <ts-project>/meta-yocto/meta-yocto-bsp
+$ bitbake-layers add-layer <ts-project>/meta-tensorflow
+$ bitbake-layers add-layer <ts-project>/meta-tensorflow/meta-demo
 
 3) Build demo image.
 $ cd <ts-build>

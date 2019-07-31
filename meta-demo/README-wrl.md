@@ -1,6 +1,3 @@
-
-
-
 # TensorFlow/TensorFlow Lite Demo
 
 ## Demo 1. [TensorFlow for poets 2](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/#0)
@@ -36,7 +33,7 @@ $ ./wrlinux-x/setup.sh --machines intel-x86-64 --distro wrlinux \
       --templates feature/xfce --dl-layers
 
 2) Prepare build
-$ . <ts-project>/oe-core/oe-init-build-env <ts-build>
+$ . <ts-project>/oe-init-build-env <ts-build>
 # Allow fetch from internet
 $ sed -i "s/BB_NO_NETWORK/#BB_NO_NETWORK/" conf/local.conf
 
@@ -48,9 +45,8 @@ $ echo 'IMAGE_INSTALL_append = " face-detection"' >> conf/local.conf
 $ echo 'DISTRO_FEATURES_append = " ts-demo"' >> conf/local.conf
 
 # Add external layers
-$ bitbake add-layer <ts-project>/meta-java
-$ bitbake add-layer <ts-project>/meta-tensorflow
-$ bitbake add-layer <ts-project>/meta-tensorflow/meta-demo
+$ bitbake-layers add-layer <ts-project>/meta-tensorflow
+$ bitbake-layers add-layer <ts-project>/meta-tensorflow/meta-demo
 
 3) Build demo image.
 $ cd <ts-build>
