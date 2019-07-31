@@ -37,7 +37,7 @@ revision: HEAD
 ### 2. Based on Wind River Linux
 Wind River Linux (CI/CD branch)
 
-## Quick Start
+## Installation
 [Build and Run](https://github.com/hongxu-jia/meta-tensorflow/blob/master/BUILD.md)
 
 ## Demo 1. Facial recognition
