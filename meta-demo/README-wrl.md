@@ -1,6 +1,6 @@
-# TensorFlow/TensorFlow Lite Demo
+# TensorFlow/TensorFlow Lite Demo on Wind River Linux
 
-## Demo 1. [TensorFlow for poets 2](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/#0)
+## Demo 1. Facial recognition
 ### 1.1 What the demo does
 * Build TensorFlow/TensorFlow Lite for Yocto
 * Use Yocto build system to train an image classifier model
