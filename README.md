@@ -38,19 +38,19 @@ revision: HEAD
 Wind River Linux (CI/CD branch)
 
 ## Installation
-[Build and Run](https://github.com/hongxu-jia/meta-tensorflow/blob/master/BUILD.md)
+[Build and Run](https://github.com/Wind-River/meta-tensorflow/blob/master/BUILD.md)
 
 ## Demo 1. Facial recognition
 ### 1.1 Based on Yocto
-[Face recognition on Yocto](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/README.md)
+[Face recognition on Yocto](https://github.com/Wind-River/meta-tensorflow/blob/master/meta-demo/README.md)
 
 ### 1.2 Based on Wind River Linux
-[Face recognition on Wind River Linux](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/README-wrl.md)
->![picture](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/files/tensorflow-demo.gif)
+[Face recognition on Wind River Linux](https://github.com/Wind-River/meta-tensorflow/blob/master/meta-demo/README-wrl.md)
+>![picture](https://github.com/Wind-River/meta-tensorflow/blob/master/meta-demo/files/tensorflow-demo.gif)
 
-## Demo 2. [Neural Machine Translation](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/recipes-demo/nmt/README-nmt.md)
+## Demo 2. [Neural Machine Translation](https://github.com/Wind-River/meta-tensorflow/blob/master/meta-demo/recipes-demo/nmt/README-nmt.md)
 
-## Demo 3. [Minigo: A minimalist Go engine modeled after AlphaGo Zero](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/recipes-demo/minigo/README.md)
+## Demo 3. [Minigo: A minimalist Go engine modeled after AlphaGo Zero](https://github.com/Wind-River/meta-tensorflow/blob/master/meta-demo/recipes-demo/minigo/README.md)
 
 ## Project License
 ```

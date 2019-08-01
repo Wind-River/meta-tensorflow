@@ -1,7 +1,7 @@
 # Maintenance and Contributing
 ## Source code
 ```
-https://github.com/hongxu-jia/meta-tensorflow.git
+https://github.com/Wind-River/meta-tensorflow(TODO)
 or
 git://git.yoctoproject.org/meta-tensorflow
 ```
@@ -22,5 +22,5 @@ example:
 git send-email -1 -M --to yocto@yoctoproject.org  --subject-prefix=meta-tensorflow][PATCH
 ```
 
-### 2. Github
-Submit pull request to https://github.com/hongxu-jia/meta-tensorflow.git
+### 2. Github (TODO)
+Submit pull request to https://github.com/Wind-River/meta-tensorflow

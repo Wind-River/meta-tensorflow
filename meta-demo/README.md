@@ -12,15 +12,15 @@
 * A build server to run Yocto build system
 * An [Intel NUC](https://www.intel.com/content/www/us/en/products/boards-kits/nuc.html)
 
->![picture](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/files/nuc.jpg)
+>![picture](https://github.com/Wind-River/meta-tensorflow/blob/master/meta-demo/files/nuc.jpg)
 
 * A USB stick
 
->![picture](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/files/usb_stick.jpg)
+>![picture](https://github.com/Wind-River/meta-tensorflow/blob/master/meta-demo/files/usb_stick.jpg)
 
 * A USB webcam
 
->![picture](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/files/usb_webcam.jpg)
+>![picture](https://github.com/Wind-River/meta-tensorflow/blob/master/meta-demo/files/usb_webcam.jpg)
 
 ### 1.3 Build for image collection
 
@@ -65,7 +65,7 @@ sh-4.4:~#
 sh-4.4:~# collect_face --label hongxu --dir /root/person --time 30
 In 30 seconds, record hongxu 414 images to /root/person/hongxu
 ```
->![picture](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/files/label_hongxu.gif)
+>![picture](https://github.com/Wind-River/meta-tensorflow/blob/master/meta-demo/files/label_hongxu.gif)
 ```
 3) Upload face images to build server
 sh-4.4:~# scp -r /root/person user@build-server:<ts-build>
@@ -93,8 +93,8 @@ sh-4.4:~#
 2) Recognize face and label person name
 sh-4.4:~# recognize_face
 ```
->![picture](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/files/tensorflow-demo.gif)
+>![picture](https://github.com/Wind-River/meta-tensorflow/blob/master/meta-demo/files/tensorflow-demo.gif)
 
-## Demo 2. [Neural Machine Translation](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/recipes-demo/nmt/README-nmt.md)
+## Demo 2. [Neural Machine Translation](https://github.com/Wind-River/meta-tensorflow/blob/master/meta-demo/recipes-demo/nmt/README-nmt.md)
 
-## Demo 3. [Minigo: A minimalist Go engine modeled after AlphaGo Zero](https://github.com/hongxu-jia/meta-tensorflow/blob/master/meta-demo/recipes-demo/minigo/README.md)
+## Demo 3. [Minigo: A minimalist Go engine modeled after AlphaGo Zero](https://github.com/Wind-River/meta-tensorflow/blob/master/meta-demo/recipes-demo/minigo/README.md)
