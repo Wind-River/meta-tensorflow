@@ -40,7 +40,6 @@ if __name__ == "__main__":
     parser.add_argument("-l", "--label", default="test", help="name of image to be labeled")
     parser.add_argument("-d", "--dir", default="./person", help="root dir to save labeled image")
     parser.add_argument("-t", "--time", default=10.0, help="Record time (second)")
-    parser.add_argument("-s", "--save", help="Save avi video", action="store_true")
 
     args = parser.parse_args()
 
@@ -53,17 +52,6 @@ if __name__ == "__main__":
     if os.path.exists(dirname):
         shutil.rmtree(dirname)
     os.makedirs(dirname)
-
-
-    if args.save:
-        frame_width = int(camera.get(3))
-        frame_height = int(camera.get(4))
-        # Define the codec and create VideoWriter object
-        fourcc = cv.VideoWriter_fourcc(*'XVID')
-        avi_name = "%s/%s.avi" % (dirname, args.label)
-        # Define the codec and create VideoWriter object.The output is stored in 'outpy.avi' file.
-        out = cv.VideoWriter(avi_name, cv.VideoWriter_fourcc('M','J','P','G'),
-                             15, (frame_width,frame_height))
 
     i = 0
     image = ""
@@ -90,12 +78,8 @@ if __name__ == "__main__":
                     i += 1
                 # Record first recognize face
                 continue
-            if args.save:
-                out.write(frame)
             cv.imshow('Video', frame)
 
     # When everything done, release the capture
     camera.release()
-    if args.save:
-        out.release()
     cv.destroyAllWindows()

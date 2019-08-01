@@ -51,20 +51,10 @@ def _putText(img, text, pos_x, pos_y):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-s", "--save", help="Save avi video", action="store_true")
 
     args = parser.parse_args()
 
     camera = cv.VideoCapture(0)
-
-    if args.save:
-        # Define the codec and create VideoWriter object
-        fourcc = cv.VideoWriter_fourcc(*'XVID')
-        frame_width = int(camera.get(3))
-        frame_height = int(camera.get(4))
-        # Define the codec and create VideoWriter object.The output is stored in 'outpy.avi' file.
-        out = cv.VideoWriter('ts-demo.avi', cv.VideoWriter_fourcc('M','J','P','G'),
-                              10, (frame_width,frame_height))
 
     cv.namedWindow('Video',cv.WINDOW_NORMAL)
     cv.resizeWindow('Video', 1024, 768)
