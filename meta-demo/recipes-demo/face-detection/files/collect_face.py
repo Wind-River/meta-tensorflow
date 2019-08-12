@@ -27,8 +27,8 @@ import numpy as np
 import cv2 as cv
 
 
-face_cascade = cv.CascadeClassifier('/usr/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml')
-eye_cascade = cv.CascadeClassifier('/usr/share/OpenCV/haarcascades/haarcascade_eye.xml')
+face_cascade = cv.CascadeClassifier('/usr/share/opencv4/haarcascades/haarcascade_frontalface_default.xml')
+eye_cascade = cv.CascadeClassifier('/usr/share/opencv4/haarcascades/haarcascade_eye.xml')
 
 def _putText(frame, text, pos_x, pos_y):
     for i, line in enumerate(text.split('\n')):

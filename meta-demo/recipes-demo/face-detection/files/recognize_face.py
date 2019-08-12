@@ -24,8 +24,8 @@ import argparse
 
 from tensorflow_for_poets.label_image_lite import label_image
 
-face_cascade = cv.CascadeClassifier('/usr/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml')
-eye_cascade = cv.CascadeClassifier('/usr/share/OpenCV/haarcascades/haarcascade_eye.xml')
+face_cascade = cv.CascadeClassifier('/usr/share/opencv4/haarcascades/haarcascade_frontalface_default.xml')
+eye_cascade = cv.CascadeClassifier('/usr/share/opencv4/haarcascades/haarcascade_eye.xml')
 
 def _face_detection(img):
     gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
