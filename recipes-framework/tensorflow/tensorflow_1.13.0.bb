@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/tensorflow/tensorflow.git;branch=r1.13 \
            file://0001-label_image.lite-tweak-default-model-location.patch \
            file://0001-use-local-bazel-to-workaround-bazel-paralle-issue.patch \
            file://0001-CheckFeatureOrDie-use-warning-to-avoid-die.patch \
+           file://0001-grpc-Define-gettid-only-for-glibc-2.30.patch \
            file://BUILD \
            file://BUILD.yocto_compiler \
            file://CROSSTOOL.tpl \

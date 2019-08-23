@@ -7,6 +7,7 @@ SRCREV = "c8875cbb1341f6ca14dd0ec908f1dde7d67f7808"
 SRC_URI = "git://github.com/tensorflow/tensorflow.git;branch=r1.13 \
            file://0001-SyntaxError-around-async-keyword-on-Python-3.7.patch \
            file://0001-use-local-bazel-to-workaround-bazel-paralle-issue.patch \
+           file://0001-grpc-Define-gettid-only-for-glibc-2.30.patch \
           "
 S = "${WORKDIR}/git"
 
