@@ -113,7 +113,7 @@ TF_ARGS_EXTRA ??= ""
 TF_TARGET_EXTRA ??= ""
 do_compile () {
     unset CC
-    ${S}/bazel build \
+    ${BAZEL} build \
         ${TF_ARGS_EXTRA} \
         -c opt \
         --cpu=armeabi \
@@ -131,7 +131,7 @@ do_compile () {
         //tensorflow/lite/examples/label_image:label_image \
         ${TF_TARGET_EXTRA}
 
-    ${S}/bazel shutdown
+    ${BAZEL} shutdown
 }
 
 do_install() {

@@ -3,19 +3,23 @@ DEPENDS += "bazel-native \
           "
 DEPENDS_append_class-target = " python3"
 
-BAZEL_OUTPUTBASE_DIR ?= "${WORKDIR}/bazel/output_base"
-export BAZEL_ARGS="--output_user_root=${WORKDIR}/bazel/user_root \
+BAZEL_DIR ?= "${WORKDIR}/bazel"
+BAZEL_OUTPUTBASE_DIR ?= "${BAZEL_DIR}/output_base"
+export BAZEL_ARGS="--output_user_root=${BAZEL_DIR}/user_root \
                    --output_base=${BAZEL_OUTPUTBASE_DIR} \
                    --bazelrc=${S}/bazelrc \
                   "
 
 export JAVA_HOME="${STAGING_LIBDIR_NATIVE}/jvm/openjdk-8-native"
 
+BAZEL ?= "${BAZEL_DIR}/bazel"
+
 do_prepare_recipe_sysroot[postfuncs] += "do_install_bazel"
 do_install_bazel() {
-    install -m 0755 ${STAGING_BINDIR_NATIVE}/bazel ${S}
-    create_cmdline_wrapper ${S}/bazel \$BAZEL_ARGS
-    zip -A ${S}/bazel.real
+    mkdir -p ${BAZEL_DIR}
+    install -m 0755 ${STAGING_BINDIR_NATIVE}/bazel ${BAZEL_DIR}
+    create_cmdline_wrapper ${BAZEL} \$BAZEL_ARGS
+    zip -A ${BAZEL}.real
 }
 
 def bazel_get_flags(d):

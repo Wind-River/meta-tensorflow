@@ -25,14 +25,14 @@ DEPENDS += " \
 do_compile () {
     unset CC
     export TMPDIR="${WORKDIR}"
-    ${S}/bazel build \
+    ${BAZEL} build \
         --subcommands --explain=${T}/explain.log \
         --verbose_explanations --verbose_failures \
         --verbose_failures \
         --python_path="${PYTHON}" \
         //tensorflow_estimator/tools/pip_package:build_pip_package
 
-    ${S}/bazel shutdown
+    ${BAZEL} shutdown
 
     PYTHON_BIN_PATH="${PYTHON}" \
     ${S}/bazel-bin/tensorflow_estimator/tools/pip_package/build_pip_package \

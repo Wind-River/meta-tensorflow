@@ -45,7 +45,7 @@ do_configure_append () {
 do_compile () {
     unset CC
     DESTDIR=${WORKDIR}/python-tensorboard \
-     ${S}/bazel run \
+     ${BAZEL} run \
         --cpu=armeabi \
         --subcommands --explain=${T}/explain.log \
         --verbose_explanations --verbose_failures \
@@ -53,7 +53,7 @@ do_compile () {
         --verbose_failures \
         //tensorboard/pip_package:build_pip_package
 
-    ${S}/bazel shutdown
+    ${BAZEL} shutdown
 }
 
 do_install () {

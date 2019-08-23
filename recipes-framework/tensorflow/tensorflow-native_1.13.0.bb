@@ -39,14 +39,14 @@ do_configure_append () {
 
 do_compile () {
     unset CC
-    ${S}/bazel build \
+    ${BAZEL} build \
         -c opt \
         --subcommands --explain=${T}/explain.log \
         --verbose_explanations --verbose_failures \
         --verbose_failures \
         //tensorflow/tools/pip_package:build_pip_package
 
-    ${S}/bazel shutdown
+    ${BAZEL} shutdown
 }
 
 do_install() {

@@ -19,7 +19,7 @@ index 4f8cae2..2121a90 100644
      sys.exit(0)
    curr_version = run_shell(
 -      ['bazel', '--batch', '--bazelrc=/dev/null', 'version'])
-+      ['./bazel', '--batch', '--bazelrc=/dev/null', 'version'])
++      ['../bazel/bazel', '--batch', '--bazelrc=/dev/null', 'version'])
  
    for line in curr_version.split('\n'):
      if 'Build label: ' in line:
