@@ -185,6 +185,7 @@ do_install() {
             mv $app ${D}${sbindir}
         done
 
+        rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/tensorflow/libtensorflow_framework.so
     )
 }
 
