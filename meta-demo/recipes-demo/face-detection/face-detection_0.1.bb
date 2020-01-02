@@ -13,6 +13,7 @@ RDEPENDS_${PN} = " \
     opencv-apps \
     opencv-samples \
     kernel-module-uvcvideo \
+    python3-core \
 "
 
 do_install () {

@@ -33,7 +33,7 @@ DEPENDS += " \
     tensorflow-estimator-native \
 "
 RDEPENDS_${PN} += "tensorflow \
-                   python3 \
+                   python3-core \
                    python3-pillow \
 "
 inherit python3native
