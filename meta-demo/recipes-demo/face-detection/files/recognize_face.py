@@ -67,12 +67,8 @@ if __name__ == "__main__":
         rv, frame = camera.read()
         if rv:
             _face_detection(frame)
-            if args.save:
-                out.write(frame)
             cv.imshow('Video', frame)
 
     # When everything done, release the capture
     camera.release()
-    if args.save:
-        out.release()
     cv.destroyAllWindows()
