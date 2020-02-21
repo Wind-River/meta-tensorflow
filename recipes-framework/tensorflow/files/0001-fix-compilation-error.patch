@@ -1,0 +1,58 @@
+From c1d33029372d7b4d3b5cc1d52d92c414c97ca763 Mon Sep 17 00:00:00 2001
+From: Chen Qi <Qi.Chen@windriver.com>
+Date: Fri, 21 Feb 2020 11:45:04 +0800
+Subject: [PATCH] fix compilation error
+
+This fix references https://github.com/tensorflow/tensorflow/issues/34197.
+
+Upstream-Status: Pending
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+---
+ tensorflow/python/eager/pywrap_tfe_src.cc           | 2 +-
+ tensorflow/python/lib/core/bfloat16.cc              | 2 +-
+ tensorflow/python/lib/core/ndarray_tensor_bridge.cc | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/tensorflow/python/eager/pywrap_tfe_src.cc b/tensorflow/python/eager/pywrap_tfe_src.cc
+index 9ce500bc08..6c6cb215f2 100644
+--- a/tensorflow/python/eager/pywrap_tfe_src.cc
++++ b/tensorflow/python/eager/pywrap_tfe_src.cc
+@@ -1216,7 +1216,7 @@ static PyTypeObject TFE_Py_Tape_Type = {
+     sizeof(TFE_Py_Tape),                          /* tp_basicsize */
+     0,                                            /* tp_itemsize */
+     &TFE_Py_Tape_Delete,                          /* tp_dealloc */
+-    nullptr,                                      /* tp_print */
++    NULL,                                      /* tp_print */
+     nullptr,                                      /* tp_getattr */
+     nullptr,                                      /* tp_setattr */
+     nullptr,                                      /* tp_reserved */
+diff --git a/tensorflow/python/lib/core/bfloat16.cc b/tensorflow/python/lib/core/bfloat16.cc
+index fde3a83770..9b8fa97958 100644
+--- a/tensorflow/python/lib/core/bfloat16.cc
++++ b/tensorflow/python/lib/core/bfloat16.cc
+@@ -317,7 +317,7 @@ PyTypeObject PyBfloat16_Type = {
+     sizeof(PyBfloat16),                        // tp_basicsize
+     0,                                         // tp_itemsize
+     nullptr,                                   // tp_dealloc
+-    nullptr,                                   // tp_print
++    NULL,                                   // tp_print
+     nullptr,                                   // tp_getattr
+     nullptr,                                   // tp_setattr
+     nullptr,                                   // tp_compare / tp_reserved
+diff --git a/tensorflow/python/lib/core/ndarray_tensor_bridge.cc b/tensorflow/python/lib/core/ndarray_tensor_bridge.cc
+index 0d5838505f..50c1f885f4 100644
+--- a/tensorflow/python/lib/core/ndarray_tensor_bridge.cc
++++ b/tensorflow/python/lib/core/ndarray_tensor_bridge.cc
+@@ -86,7 +86,7 @@ PyTypeObject TensorReleaserType = {
+     0,                                /* tp_itemsize */
+     /* methods */
+     TensorReleaser_dealloc,      /* tp_dealloc */
+-    nullptr,                     /* tp_print */
++    NULL,                     /* tp_print */
+     nullptr,                     /* tp_getattr */
+     nullptr,                     /* tp_setattr */
+     nullptr,                     /* tp_compare */
+-- 
+2.17.1
+

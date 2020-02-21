@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/tensorflow/tensorflow.git;branch=r1.13 \
            file://BUILD.yocto_compiler \
            file://CROSSTOOL.tpl \
            file://yocto_compiler_configure.bzl \
+           file://0001-fix-compilation-error.patch \
           "
 
 S = "${WORKDIR}/git"
