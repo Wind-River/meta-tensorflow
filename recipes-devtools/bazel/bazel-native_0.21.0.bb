@@ -9,7 +9,7 @@ SRC_URI = "https://github.com/bazelbuild/bazel/releases/download/${PV}/bazel-${P
            file://0001-HttpDownloader-save-download-tarball-to-distdir.patch \
 "
 
-inherit native
+inherit native pythonnative
 
 INHIBIT_SYSROOT_STRIP = "1"
 
